@@ -1,0 +1,40 @@
+user  nginx;
+worker_processes auto;
+
+## This is fine, /var/log/nginx/error.log is linked to stderr by our base nginx image
+error_log  /var/log/nginx/error.log info;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    ## We don't really need this... error log is enough
+    ## But if we change our minds laters, it is ok to enable it,
+    ## it will be redirected to stdoud
+    ## access_log  /var/log/nginx/access.log  main;
+    access_log off;
+
+    sendfile on;
+    gzip     on;
+
+    keepalive_timeout 30;
+
+    ## Our default server now...
+    server {
+        listen       ${PORT:-80} default_server;
+        server_name  _; ## any host will do...
+
+        location / {
+            root   ${DOCROOT:-/usr/share/nginx/html};
+            index  ${INDEX_FILE:-index.html};
+        }
+    }
+}
