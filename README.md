@@ -54,6 +54,12 @@ Three configurations were added, via ENV, or `docker run -e`:
 * `INDEX_FILE` (default `index.html`): name of the default file used for
   directory listings.
 
+There are also configurations for a health check URL:
+
+* `HEALTH_URL` (defaults to `/_/health`): URL for the health check;
+* `HEALTH_HTTP_STATUS` (defaults to `200`): HTTP status od the response;
+* `HEALTH_CONTENT` (defaults to `ok`):body of the response.
+
 
 ## Custom nginx.conf.tmpl ##
 

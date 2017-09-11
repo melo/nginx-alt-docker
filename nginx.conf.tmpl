@@ -36,5 +36,9 @@ http {
             root   ${DOCROOT:-/usr/share/nginx/html};
             index  ${INDEX_FILE:-index.html};
         }
+
+        location ${HEALTH_URL:-/_/health} {
+            return ${HEALTH_HTTP_STATUS:-200} ${HEALTH_CONTENT:-"ok"};
+        }
     }
 }
