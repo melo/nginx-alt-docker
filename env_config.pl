@@ -16,6 +16,7 @@ use warnings;
 my ($source, $dest, @cmd) = @ARGV;
 @cmd = ('nginx', '-g', 'daemon off;') unless @cmd;    ## default command: start nginx
 @cmd = ('/bin/sh') if @cmd == 1 and $cmd[0] and $cmd[0] eq 'sh';    ## shell shortcut
+usage() if @cmd == 1 and $cmd[0] and $cmd[0] eq 'usage';    ## usage shortcut
 
 usage('missing <source> file') unless $source and -r $source;
 usage('missing <dest> file') unless $dest;
