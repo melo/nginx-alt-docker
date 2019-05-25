@@ -25,6 +25,15 @@ To use this image:
 
 Build your image and profit.
 
+The default entrypoint has a couple of extra features. Use `sh` as the `docker run` command to get a shell. 
+
+```
+$ docker run -it --rm your-nginx-alt-based-image sh
+/ #
+/ # exit
+$
+```
+
 
 ## Variable substituition ##
 
