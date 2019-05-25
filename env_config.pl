@@ -2,9 +2,11 @@
 #
 # Usage:
 #
-#    env_config.pl <source> <dest> <other commands>
+#    env_config.pl <other commands>
 #
-# Reads <source> file, replaces all environment variables found, and writes to <dest>.
+# Reads a nginx.conf template source file (defaults to
+# `/etc/nginx/nginx.conf.tmpl`), replaces all environment
+# variables found, and writes to `/etc/nginx/nginx.conf.
 #
 # Afterwards, exec's <other command>
 #
@@ -13,13 +15,14 @@
 use strict;
 use warnings;
 
-my ($source, $dest, @cmd) = @ARGV;
+my (@cmd) = @ARGV;
 @cmd = ('nginx', '-g', 'daemon off;') unless @cmd;    ## default command: start nginx
 @cmd = ('/bin/sh') if @cmd == 1 and $cmd[0] and $cmd[0] eq 'sh';    ## shell shortcut
 usage() if @cmd == 1 and $cmd[0] and $cmd[0] eq 'usage';    ## usage shortcut
 
+my $dest   = '/etc/nginx/nginx.conf';
+my $source = '/etc/nginx/nginx.conf.tmpl';
 usage('missing <source> file') unless $source and -r $source;
-usage('missing <dest> file') unless $dest;
 
 open(my $in,  '<:raw', $source) or fatal("failed to open file '$source'");
 open(my $out, '>:raw', $dest)   or fatal("failed to create file '$dest'");
