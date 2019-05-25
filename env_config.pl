@@ -35,6 +35,7 @@ close($in);
 close($out);
 
 exec(@cmd) if @cmd;
+die "FATAL: failed to exec '@cmd': $?";
 
 
 sub usage {
