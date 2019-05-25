@@ -34,6 +34,14 @@ $ docker run -it --rm your-nginx-alt-based-image sh
 $
 ```
 
+Use `usage` as the `docker run` command to get this readme file.
+
+```
+$ docker run -it --rm your-nginx-alt-based-image usage
+... this readme ...
+$
+```
+
 
 ## Variable substituition ##
 

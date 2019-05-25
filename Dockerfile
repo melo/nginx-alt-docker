@@ -1,5 +1,8 @@
 FROM nginx:mainline-alpine
 
+## Make the project README available for `usage`
+COPY README.md /
+
 ## We use a Perl-based entrypoint to tweak the configuration based on ENV vars
 ## See README for all ENV vars supported
 RUN apk --no-cache add perl 

@@ -18,7 +18,8 @@ use warnings;
 my (@cmd) = @ARGV;
 @cmd = ('nginx', '-g', 'daemon off;') unless @cmd;    ## default command: start nginx
 @cmd = ('/bin/sh') if @cmd == 1 and $cmd[0] and $cmd[0] eq 'sh';    ## shell shortcut
-usage() if @cmd == 1 and $cmd[0] and $cmd[0] eq 'usage';    ## usage shortcut
+usage() if @cmd == 1 and $cmd[0] and $cmd[0] eq 'usage';            ## usage shortcut
+help() if @cmd == 1 and $cmd[0] and ($cmd[0] eq 'help' or $cmd[0] eq 'readme');    ## readme
 
 my $dest   = '/etc/nginx/nginx.conf';
 my $source = '/etc/nginx/nginx.conf.tmpl';
@@ -50,6 +51,11 @@ sub usage {
 
   }
   exit(2);
+}
+
+sub help {
+  exec('/bin/cat', '/README.md');
+  die "FATAL: failed to exec '/bin/cat': $?";
 }
 
 sub fatal {
