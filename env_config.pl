@@ -8,6 +8,9 @@
 # `/etc/nginx/nginx.conf.tmpl`), replaces all environment
 # variables found, and writes to `/etc/nginx/nginx.conf.
 #
+# You can defined an alternative nginx.conf.tmpl file using the
+# NGINX_CONF_TMPL environment variable.
+#
 # Afterwards, exec's <other command>
 #
 # Works fine as entrypoint script, no dependencies
@@ -22,7 +25,7 @@ usage() if @cmd == 1 and $cmd[0] and $cmd[0] eq 'usage';            ## usage sho
 help() if @cmd == 1 and $cmd[0] and ($cmd[0] eq 'help' or $cmd[0] eq 'readme');    ## readme
 
 my $dest   = '/etc/nginx/nginx.conf';
-my $source = '/etc/nginx/nginx.conf.tmpl';
+my $source = $ENV{NGINX_CONF_TMPL} || '/etc/nginx/nginx.conf.tmpl';
 usage('missing <source> file') unless $source and -r $source;
 
 open(my $in,  '<:raw', $source) or fatal("failed to open file '$source'");
