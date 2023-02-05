@@ -1,5 +1,8 @@
 FROM nginx:mainline-alpine
 
+## Keep image up-to-date
+RUN apk --no-cache upgrade
+
 ## Make the project README available for `usage`
 COPY README.md /
 
