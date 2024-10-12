@@ -1,0 +1,1 @@
+FROM dockage/alpine-php-fpm

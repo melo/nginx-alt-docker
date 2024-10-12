@@ -10,6 +10,12 @@ or to use a different document root.
 Your child images can add a customized `nginx.conf.tmpl` and still
 benefit from ENV-based customisation.
 
+You'll also find a
+[Chainguard](https://images.chainguard.dev/directory/image/nginx/overview)-based
+image with the tag `chainguard`. We will probably start using
+this one as `latest` in 2025 after some more tests.
+
+
 # How to use #
 
 ## Quick start ##
